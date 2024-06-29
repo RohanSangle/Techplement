@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.homebg{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 99%;
+}
+
+h1{
+    position:absolute;
+    left: 10%;
+    top: 5%;
+    width: 20%;
+    height: 10%;
+    background-color:transparent;
+    color: #6458a2;
+}
+
+.miniheader{
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    width: 35%;
+    height: 10%;
+    background-color: transparent;
+    /* color: black; */
+}
+
+button{
+    position: absolute;
+    top: 60%;
+    height: 8%;
+    width: 10%;
+    left: 45%;
+    border: 0;
+    background-color: #6458a2;
+    
+}
+button:hover{
+    cursor: pointer;
+}
