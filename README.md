@@ -1,0 +1,1 @@
+simple quote of the day website
