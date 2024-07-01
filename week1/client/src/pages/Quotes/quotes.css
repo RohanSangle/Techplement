@@ -1,0 +1,39 @@
+.settingsicon{
+    margin-left: -15%;
+    color: white;
+}
+
+.user-avatar {
+    top: 80%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    cursor: pointer;
+    margin-left: 30%;
+}
+
+.user-avatar:hover .logout-button {
+    opacity: 1;
+    transform: translate(-30%, 70%);
+}
+
+/* .user-avatar img {
+    width: 100%;
+    background-color: hsl(223 36% 14%);
+} */
+
+.logout-button {
+    background: transparent;
+    border: unset;
+    color: white;
+    position: absolute;
+    width: 60px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #6458a2;
+    left: 5%;
+    transform: translate(-30%, -30%);
+    opacity: 0;
+    transition: 0.6s cubic-bezier(0, 0.39, 0.87, 1.08);
+    cursor: pointer;
+}
