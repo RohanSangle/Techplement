@@ -5,7 +5,8 @@ import { Navigate, Outlet } from 'react-router-dom';
 const ProtectedRoute = () => {
 //   const { userLoggedIn } = useAuth();
 
-  return userLoggedIn ? <Outlet /> : <Navigate to="/login" replace />;
+  // return userLoggedIn ? <Outlet /> : <Navigate to="/login" replace />;
+  return <Outlet />;
 }
 
 export default ProtectedRoute

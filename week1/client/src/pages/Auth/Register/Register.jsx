@@ -1,24 +1,40 @@
 import React,{useState}  from 'react'
 import './register.css'
 
-import { Navigate, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+// import { useHistory } from 'react-router-dom';
+
+import { signin, signup } from '../../../actions/auth';
+
+import { useNavigate, Link } from 'react-router-dom'
+
+const initialState = { username: '', email: '', password: '', confirmPassword: '' };
 
 const Register = () => {
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setconfirmPassword] = useState('')
-  const [isRegistering, setIsRegistering] = useState(false)
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
+  // const [confirmPassword, setconfirmPassword] = useState('')
+  // const [isRegistering, setIsRegistering] = useState(false)
+
+  const [form, setForm] = useState(initialState);
+  const dispatch = useDispatch();
+  // const history = useHistory();
+  const navigate = useNavigate();
 
   // const { userLoggedIn } = useAuth()
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
     // if(!isRegistering) {
     //   setIsRegistering(true)
     //   await doCreateUserWithEmailAndPassword(email, password)
     // }
+    // console.log("Form data on submit:", form);
+    dispatch(signup(form, navigate));
   }
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   return (
     <div className="login-page">
@@ -30,41 +46,53 @@ const Register = () => {
         <form className='form' onSubmit={onSubmit}>
           <div className='input-wrapper2'>
             <input
-              placeholder='Email address'
-              type="email"
-              name="email"
+              placeholder='username'
+              type="text"
+              name="username"
               required
-              value={email}
+              value={form.username}
               autoComplete='off'
-              onChange={(e) => { setEmail(e.target.value)}}
+              onChange={handleChange}
             />
             {/* {errors.email && <span className="error">{errors.email}</span>} */}
           </div>
           <div className='input-wrapper2'>
             <input
-              disabled={isRegistering}
+              placeholder='Email address'
+              type="email"
+              name="email"
+              required
+              value={form.email}
+              autoComplete='off'
+              onChange={handleChange}
+            />
+            {/* {errors.email && <span className="error">{errors.email}</span>} */}
+          </div>
+          <div className='input-wrapper2'>
+            <input
+              // disabled={isRegistering}
               placeholder='Password'
               type="password"
               name="password"
               required
-              value={password}
-              onChange={(e) => { setPassword(e.target.value) }}
+              value={form.password}
+              onChange={handleChange}
             />
             {/* {errors.password && <span className="error">{errors.password}</span>} */}
           </div>
           <div className='input-wrapper2'>
             <input
-              disabled={isRegistering}
-              placeholder='Repeat password'
+              // disabled={isRegistering}
+              placeholder='Confirm password'
               type="password"
-              name="password2"
+              name="confirmPassword"
               required
-              value={confirmPassword}
-              onChange={(e) => { setconfirmPassword(e.target.value) }}
+              value={form.confirmPassword}
+              onChange={handleChange}
             />
             {/* {errors.password2 && <span className="error">{errors.password2}</span>} */}
           </div>
-          <button className='submit-button2' type="submit" disabled={isRegistering}>Sign Up</button>
+          <button className='submit-button2' type="submit">Sign Up</button>
           <p className="login-hint">Already have an account? <Link to={'/login'}>Login</Link></p>
         </form>
       </div>

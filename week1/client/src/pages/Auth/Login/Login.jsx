@@ -1,22 +1,37 @@
 import React, { useState } from 'react'
 import './login.css'
 
-import {Link, Navigate} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+// import { useHistory } from 'react-router-dom';
+// import { useNavigate } from "react-router-dom";
+
+import {Link, useNavigate} from 'react-router-dom';
+import { signin, signup } from '../../../actions/auth';
+// import { AUTH } from '../../constants/actionTypes';
+
+const initialState = { username: '', email: '', password: '', confirmPassword: '' };
 
 const Login = () => {
 
   // const {userLoggedIn} = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [form, setForm] = useState(initialState);
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [isSigningIn, setIsSigningIn] = useState(false);
+  const dispatch = useDispatch();
+  // const history = useHistory();
+  const navigate = useNavigate();
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
     // if(!isSigningIn){
     //   setIsSigningIn(true)
     //   await doSignInWithEmailAndPassword(email, password)
     // }
+    dispatch(signin(form, navigate));
   }
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   // if(userLoggedIn){
   //   return <Navigate to="/quotes" replace={true} />
@@ -32,13 +47,26 @@ const Login = () => {
         <form className='form' onSubmit={onSubmit}>
           <div className='input-wrapper'>
             <input
+              placeholder='username'
+              type="text"
+              name="username"
+              required
+              value={form.username}
+              autoComplete='off'
+              onChange={handleChange}
+
+            />
+            {/* {errors.email && <span className="error">{errors.email}</span>} */}
+          </div>
+          <div className='input-wrapper'>
+            <input
               placeholder='Email address'
               type="email"
               name="email"
               required
-              value={email}
+              value={form.email}
               autoComplete='off'
-              onChange={(e)=>{setEmail(e.target.value)}}
+              onChange={handleChange}
 
             />
             {/* {errors.email && <span className="error">{errors.email}</span>} */}
@@ -49,8 +77,8 @@ const Login = () => {
               type="password"
               name="password"
               required
-              value={password}
-              onChange={(e)=>{setPassword(e.target.value)}}
+              value={form.password}
+              onChange={handleChange}
 
             />
             {/* {errors.password && <span className="error">{errors.password}</span>} */}
