@@ -13,7 +13,6 @@ const Home = () => {
 
   return (
     <div>
-      {/* <img className='homebg' src={homebackground} alt=''/> */}
       <h1>Quotes web App</h1>
       <h2 className='miniheader' >Inspire! Aspire! Lead!</h2>
       <button onClick={gotoauth}>Sign In</button>
