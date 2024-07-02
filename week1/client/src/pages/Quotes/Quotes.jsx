@@ -4,14 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actionType from '../../constants/actionType.js';
 import { jwtDecode } from 'jwt-decode';
-import { getRandomQuote } from '../../actions/quote.js';
+import { getRandomQuote, getQuotesByAuthor } from '../../actions/quote.js';
 
 const Quotes = () => {
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const [author, setAuthor] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const quote = useSelector((state) => state.quote?.quote);
+  const authorQuotes = useSelector((state) => state.quote?.authorQuotes);
   const [showQuote, setShowQuote] = useState(false);
 
   const logout = () => {
@@ -38,13 +40,26 @@ const Quotes = () => {
     setShowQuote(true);
   };
 
-  useEffect(() => {
-    console.log('Quote state updated:', quote);
-  }, [quote]);
+  const handleSearch = (e) => {
+    setAuthor(e.target.value);
+  };
 
-  useEffect(() => {
-    console.log('User state:', user);
-  }, [user]);
+  const searchQuotesByAuthor = () => {
+    if (author.trim()) {
+      dispatch(getQuotesByAuthor(author));
+    }
+  };
+
+  // useEffect(() => {
+  //   console.log('Quote state updated:', quote);
+  // }, [quote]);
+
+  // useEffect(() => {
+  //   console.log('User state:', user);
+  // }, [user]);
+  // useEffect(() => {
+  //   console.log('Author quotes state updated:', authorQuotes);
+  // }, [authorQuotes]);
 
   return (
     <>
@@ -58,6 +73,24 @@ const Quotes = () => {
           <p className='quote-author'>~ {quote.author}</p>
         </div>
       )}
+
+      <div className='search-bar'>
+        <input
+          type='text'
+          placeholder='Search by author'
+          value={author}
+          onChange={handleSearch}
+        />
+        <button onClick={searchQuotesByAuthor}>Search</button>
+      </div>
+      <div className='author-quotes'>
+        {authorQuotes && authorQuotes.map((quote) => (
+          <div key={quote._id} className='quote-card'>
+            <p className='quote-content'>"{quote.content}"</p>
+            <p className='quote-author'>~ {quote.author}</p>
+          </div>
+        ))}
+      </div>
     </>
   )
 }
