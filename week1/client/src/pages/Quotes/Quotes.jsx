@@ -1,9 +1,10 @@
-import React,{ useState, useEffect } from 'react'
+import React,{ useState, useEffect} from 'react'
 import './quotes.css'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actionType from '../../constants/actionType.js';
 import { jwtDecode } from 'jwt-decode';
+import { getRandomQuote } from '../../actions/quote.js';
 
 const Quotes = () => {
 
@@ -11,6 +12,8 @@ const Quotes = () => {
   const dispatch = useDispatch();
   // const location = useLocation();
   const navigate = useNavigate();
+  const quote = useSelector((state) => state.quote?.quote);
+  const [showQuote, setShowQuote] = useState(false);
 
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
@@ -32,6 +35,16 @@ const Quotes = () => {
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
 
+  const fetchQuote = () => {
+    // console.log('Fetching quote...');
+    dispatch(getRandomQuote());
+    setShowQuote(true);
+  };
+
+  useEffect(() => {
+    console.log('Quote state updated:', quote);
+  }, [quote]);
+
   return (
     <>
       {/* <button className='logout-button' onClick={logout}>Logout</button> */}
@@ -40,6 +53,15 @@ const Quotes = () => {
         <img className='settingsicon' src="" alt="" />
         <button className='logout-button' onClick={logout}>Logout</button>
       </div>
+
+      <button className='fetch-quote-button' onClick={fetchQuote}>Fetch Random Quote</button>
+      {/* {console.log("quote in frontend :" + quote)} */}
+      {showQuote && quote && (
+        <div className='quote-display'>
+          <p className='quote-text'>"{quote.content}"</p>
+          <p className='quote-author'>~ {quote.author}</p>
+        </div>
+      )}
     </>
   )
 }
