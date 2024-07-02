@@ -1,11 +1,11 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom';
-// import { useAuth } from '../../../contexts/authContext/index.jsx';
+// import { useAuth } from '../../../contexts/authContext.js';
 
 const ProtectedRoute = () => {
-//   const { userLoggedIn } = useAuth();
+  // const { user } = useAuth();
 
-  // return userLoggedIn ? <Outlet /> : <Navigate to="/login" replace />;
+  // return user ? <Outlet /> : <Navigate to="/login" replace />;
   return <Outlet />;
 }
 

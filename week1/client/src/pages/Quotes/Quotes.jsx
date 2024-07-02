@@ -45,20 +45,26 @@ const Quotes = () => {
     console.log('Quote state updated:', quote);
   }, [quote]);
 
+  useEffect(() => {
+    console.log('User state:', user);
+  }, [user]);
+
   return (
     <>
-      {/* <button className='logout-button' onClick={logout}>Logout</button> */}
-      <div className='user-avatar'>
-        {/* <div className='settingsicon'><IoSettingsOutline /></div> */}
-        <img className='settingsicon' src="" alt="" />
-        <button className='logout-button' onClick={logout}>Logout</button>
-      </div>
 
-      <button className='fetch-quote-button' onClick={fetchQuote}>Fetch Random Quote</button>
+      <h2 className='mainhead'>Welcome {user?.result.username || 'Guest'}!</h2>
+      {/* <button className='logout-button' onClick={logout}>Logout</button> */}
+      {/* <div className='user-avatar'>
+        <div className='settingsicon'><IoSettingsOutline /></div>
+        <img className='settingsicon' src="" alt="" />
+      </div> */}
+      <button className='logout-button' onClick={logout}>Logout</button>
+
+      <button className='fetch-quote-button' onClick={fetchQuote}>Inspire Me!</button>
       {/* {console.log("quote in frontend :" + quote)} */}
       {showQuote && quote && (
         <div className='quote-display'>
-          <p className='quote-text'>"{quote.content}"</p>
+          <h2 className='quote-text'>"{quote.content}"</h2>
           <p className='quote-author'>~ {quote.author}</p>
         </div>
       )}

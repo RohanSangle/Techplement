@@ -4,6 +4,7 @@ import './login.css'
 import { useDispatch } from 'react-redux';
 // import { useHistory } from 'react-router-dom';
 // import { useNavigate } from "react-router-dom";
+// import { useAuth } from '../../../contexts/authContext';
 
 import {Link, useNavigate} from 'react-router-dom';
 import { signin, signup } from '../../../actions/auth';
@@ -21,6 +22,7 @@ const Login = () => {
   const dispatch = useDispatch();
   // const history = useHistory();
   const navigate = useNavigate();
+  // const { login } = useAuth();
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -29,6 +31,7 @@ const Login = () => {
     //   await doSignInWithEmailAndPassword(email, password)
     // }
     dispatch(signin(form, navigate));
+    // login(data);
   }
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });

@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { signin, signup } from '../../../actions/auth';
 
 import { useNavigate, Link } from 'react-router-dom'
+// import { useAuth } from '../../../contexts/authContext';
 
 const initialState = { username: '', email: '', password: '', confirmPassword: '' };
 
