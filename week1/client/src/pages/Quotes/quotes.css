@@ -62,7 +62,7 @@
     height: 10%;
     width: 100%;
     margin-top: 34%;
-    background-color: pink;
+    /* background-color: pink; */
     /* margin: 20px 0; */
 }
   
@@ -79,7 +79,7 @@
 .search-bar button {
     /* padding: 10px 20px; */
     margin-left: 18%;
-    margin-top: 7.5%;
+    margin-top: 6.5%;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
